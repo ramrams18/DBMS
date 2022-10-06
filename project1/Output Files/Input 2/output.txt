@@ -1,0 +1,12 @@
+b1; T1 begins. Id=1. TS=1. state=active.
+r1(Y); Y is read locked by T1.
+w1(Y); read lock on Y by T1 is upgraded to write lock.
+r1(Z); Z is read locked by T1.
+b2; T2 begins. Id=2. TS=2. state=active.
+r2(Y); T2 is aborted due to wait-die.
+b3; T3 begins. Id=3. TS=3. state=active.
+r3(Z); Z is read locked by T3.
+w1(Z); T1 is blocked/waiting due to wait-die. 
+e1; Committing T1 is added to operation list.
+w3(Z); T3 is aborted due to wait-die.
+e3; T3 is already aborted.

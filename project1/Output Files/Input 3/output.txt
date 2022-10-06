@@ -1,0 +1,18 @@
+b1; T1 begins. Id=1. TS=1. state=active.
+r1(Y); Y is read locked by T1
+w1(Y); read lock on Y by T1 is upgraded to write lock
+r1(Z); Z is read locked by T1
+b3; T3 begins. Id=2. TS=2. state=active.
+r3(X); X is read locked by T3
+w3(X); read lock on X by T3 is upgraded to write lock
+w1(Z); read lock on Z by T1 is upgraded to write lock
+e1; T1 is committed
+r3(Y); Y is read locked by T3
+b2; T2 begins. Id=3. TS=3. state=active.
+r2(Z); Z is read locked by T2
+w2(Z); read lock on Z by T2 is upgraded to write lock
+w3(Y); read lock on Y by T3 is upgraded to write lock
+e3; T3 is committed
+r2(X); X is read locked by T2
+w2(X); read lock on X by T2 is upgraded to write lock
+e2; T2 is committed
